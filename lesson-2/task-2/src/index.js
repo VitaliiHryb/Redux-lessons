@@ -1,22 +1,22 @@
-import './index.scss';
 import store, { increment, decrement, reset } from './store';
+import './index.scss';
 
 const resultElem = document.querySelector('.counter__result');
 const incrementBtn = document.querySelector('[data-action="increment"]');
 const resetBtn = document.querySelector('[data-action="reset"]');
 const decrementBtn = document.querySelector('[data-action="decrement"]');
 
-const onIncrement = () => {
+function onIncrement() {
   store.dispatch(increment());
-};
+}
 
-const onDecrement = () => {
+function onDecrement() {
   store.dispatch(decrement());
-};
+}
 
-const onReset = () => {
+function onReset() {
   store.dispatch(reset());
-};
+}
 
 incrementBtn.addEventListener('click', onIncrement);
 decrementBtn.addEventListener('click', onDecrement);
@@ -27,5 +27,5 @@ store.subscribe(() => {
   const currentValue = state.history.reduce((acc, value) => +value + acc, 0);
   const historyString = state.history.join('');
   resultElem.textContent =
-    state.history.length === 0 ? '' : `${historyString} = ${currentValue}`;
+    state.history.length !== 0 ? `${historyString} = ${currentValue}` : '';
 });
