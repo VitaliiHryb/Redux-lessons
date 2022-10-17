@@ -2,8 +2,6 @@
 // сделайте dispatch созданных actions в store.
 // Подпишитесь на изменения store, чтобы видеть как он меняется
 
-// ps Код в файле src/index.js тестироваться системой не будет. Он предназначен для ваших экспериментов
-
 import store from './store';
 import { addUser, deleteUser } from './users.actions';
 
