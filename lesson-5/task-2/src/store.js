@@ -1,14 +1,12 @@
 import { createStore, combineReducers } from 'redux';
-import usersReduser from './users/users.reducer';
-import counterReduser from './counter/counter.reducer';
+import optionsReducer from './options/options.reducer';
 
-const appReduser = combineReducers({
-  users: usersReduser,
-  counter: counterReduser,
+const reducer = combineReducers({
+  options: optionsReducer,
 });
 
 const store = createStore(
-  appReduser,
+  reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
