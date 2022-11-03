@@ -1,10 +1,8 @@
-export const GO_PREV = 'GO_PREV';
-export const GO_NEXT = 'GO_NEXT';
+export const SET_FILTER_TEXT = 'SET_FILTER_TEXT';
 
-export function goPrev() {
-  return { type: GO_PREV };
-}
-
-export function goNext() {
-  return { type: GO_NEXT };
+export function setFilterText(text) {
+  return {
+    type: SET_FILTER_TEXT,
+    payload: { text },
+  };
 }

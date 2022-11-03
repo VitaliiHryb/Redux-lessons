@@ -1,48 +1,36 @@
-// опишите компоненту, которая принимает список пользователей в свойстве users и отображает пагинацию и список пользователей
-// Только UsersList должна быть контейнер компонентой (коннектится к store)
-
 import React from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from './users.actions';
-import Pagination from './Pagination';
+import { filteredUsersSelector } from './users.selectors';
+import Filter from '../Filter';
 import User from './User';
 
-class UsersList extends React.Component {
-  state = { itemsPerPage: 3 };
-
-  render() {
-    const { users, goPrev, goNext, currentPage } = this.props;
-    const { itemsPerPage } = this.state;
-    let startIndex = currentPage * itemsPerPage;
-    const showedUsers = users
-      .slice(startIndex, itemsPerPage + startIndex)
-      .map(({ id, ...user }) => <User key={id} {...user} />);
-
-    return (
-      <div>
-        <Pagination
-          goPrev={goPrev}
-          goNext={goNext}
-          currentPage={currentPage}
-          totalItems={users.length}
-          itemsPerPage={itemsPerPage}
-        />
-        <ul className="users">{showedUsers}</ul>
-      </div>
-    );
-  }
+function UsersList({ usersList, setFilterText, filterText }) {
+  return (
+    <div>
+      <Filter
+        filterText={filterText}
+        count={usersList.length}
+        onChange={setFilterText}
+      />
+      <ul className="users">
+        {usersList.map(user => (
+          <User key={user.id} {...user} />
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-function mapState(state) {
+function mapStateToProps(state) {
   return {
-    users: state.users,
-    currentPage: state.currentPage,
+    usersList: filteredUsersSelector(state),
+    filterText: state.users.filterText,
   };
 }
 
-const mapDispatch = {
-  goPrev: usersActions.goPrev,
-  goNext: usersActions.goNext,
+const mapDispatchToProps = {
+  setFilterText: usersActions.setFilterText,
 };
 
-export default connect(mapState, mapDispatch)(UsersList);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
