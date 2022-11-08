@@ -1,10 +1,10 @@
-export const SHOW__SPINNER = 'SHOW__SPINNER';
-export const USER_DATA_RECIEVED = 'USER_DATA_RECIEVED';
 import { getUserData } from './users.gateway';
+export const SHOW_SPINNER = 'SHOW_SPINNER';
+export const USER_DATA_RECIEVED = 'USER_DATA_RECIEVED';
 
 export function showSpinner() {
   return {
-    type: SHOW__SPINNER,
+    type: SHOW_SPINNER,
   };
 }
 
