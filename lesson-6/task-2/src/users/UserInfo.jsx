@@ -1,11 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isFetchingSelector, userDataSelector } from './users.selectors';
 import Spinner from './Spinner';
 
-function UserInfo({ userData, isFetching }) {
-  if (isFetching) return <Spinner />;
-  if (!userData) return null;
+const UsersInfo = ({ userData, isFetching }) => {
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  if (!userData) {
+    return null;
+  }
+
   return (
     <div className="user">
       <img
@@ -19,26 +26,22 @@ function UserInfo({ userData, isFetching }) {
       </div>
     </div>
   );
-}
+};
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     isFetching: isFetchingSelector(state),
     userData: userDataSelector(state),
   };
-}
+};
 
-export default connect(mapStateToProps)(UserInfo);
-
-/*
-import PropTypes from 'prop-types';
-
-UserInfo.propTypes = {
+UsersInfo.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   userData: PropTypes.shape(),
 };
 
-UserInfo.defaultValue = {
+UsersInfo.defaultValue = {
   userData: null,
 };
-*/
+
+export default connect(mapStateToProps)(UsersInfo);
