@@ -22,12 +22,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk), applyMiddleware(logger)),
 );
 
-// const reducer = combineReducers({
-//   users: usersReducer,
-// });
-
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+// Начальное значение store - { users: { userData: null, isFetching: false } }
 
 export default store;
