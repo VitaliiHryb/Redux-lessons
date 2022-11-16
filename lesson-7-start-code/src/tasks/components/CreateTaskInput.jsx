@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as tasksActions from '../tasks.actions';
+
 class CreateTaskInput extends React.Component {
   state = {
     value: '',
@@ -39,7 +38,7 @@ class CreateTaskInput extends React.Component {
   }
 }
 
-export default connect(null, tasksActions)(CreateTaskInput);
+export default CreateTaskInput;
 
 // +1. Take text from input
 // +2. Create task with this text
