@@ -14,7 +14,7 @@ export const createTask = taskData => {
   });
 };
 
-export const fetchTasksList = () => {
+export const getTasksList = () => {
   return fetch(baseUrl).then(response => {
     if (response.ok) {
       return response.json();

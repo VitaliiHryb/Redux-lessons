@@ -1,6 +1,12 @@
 import React from 'react';
 import TasksList from './TasksList';
 import CreateTaskInput from './CreateTaskInput';
+import {
+  createTask,
+  updateTask,
+  deleteTask,
+  getTasksList,
+} from '../tasksGateway';
 
 class TodoList extends React.Component {
   constructor(props) {
