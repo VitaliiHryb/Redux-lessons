@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class CreateTaskInput extends React.Component {
   state = {
@@ -11,8 +12,8 @@ class CreateTaskInput extends React.Component {
     });
   };
 
-  handleTaskCreate = () => {
-    this.props.createTask(this.state.value);
+  handleCreate = () => {
+    this.props.onCreate(this.state.value);
     this.setState({
       value: '',
     });
@@ -27,16 +28,17 @@ class CreateTaskInput extends React.Component {
           onChange={this.handleChange}
           className="create-task__input"
         />
-        <button
-          className="btn create-task__btn"
-          onClick={this.handleTaskCreate}
-        >
+        <button className="btn create-task__btn" onClick={this.handleCreate}>
           Create
         </button>
       </div>
     );
   }
 }
+
+CreateTaskInput.propTypes = {
+  onCreate: PropTypes.func.isRequired,
+};
 
 export default CreateTaskInput;
 
