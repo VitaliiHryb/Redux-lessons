@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from './Task';
 
-const TasksList = ({ tasks, handleTaskStatusChange, handleTaskDelete }) => {
+const TasksList = ({ tasks, handleStatusChange, handleTaskDelete }) => {
   const sortedList = tasks.slice().sort((a, b) => a.done - b.done);
 
   return (
@@ -12,7 +12,7 @@ const TasksList = ({ tasks, handleTaskStatusChange, handleTaskDelete }) => {
           key={task.id}
           {...task}
           onDelete={handleTaskDelete}
-          onChange={handleTaskStatusChange}
+          onChange={handleStatusChange}
         />
       ))}
     </ul>

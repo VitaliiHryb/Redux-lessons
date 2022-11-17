@@ -28,7 +28,7 @@ class TodoList extends React.Component {
 
   hadleTaskStatusChange = id => {
     const { tasks } = this.state;
-    const { done, text, createDate } = tasks.fetchTasksList();
+    const { done, text, createDate } = tasks;
     const updatedTask = {
       text,
       createDate,
