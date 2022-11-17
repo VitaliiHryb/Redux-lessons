@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Task = ({ id, text, done, onChange, onDelete }) => {
   return (
-    <li className={classNames('list-item', { 'list-item_done': done })}>
+    <li className={done ? 'list-item_done' : 'list-item'}>
       <input
         type="checkbox"
         className="list-item__checkbox"
@@ -19,15 +19,17 @@ const Task = ({ id, text, done, onChange, onDelete }) => {
   );
 };
 
+// <li className={('list-item', { 'list-item_done': done })}>
+
+// Task.propTypes = {
+//   done: PropTypes.bool,
+//   title: PropTypes.string,
+//   onChange: PropTypes.func,
+//   onDelete: PropTypes.func,
+// };
+
+// Task.defaultProps = {
+//   title: '',
+// };
+
 export default Task;
-
-Task.propTypes = {
-  done: PropTypes.bool,
-  title: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
-
-Task.defaultProps = {
-  title: '',
-};

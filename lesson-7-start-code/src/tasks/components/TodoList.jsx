@@ -22,7 +22,7 @@ class TodoList extends React.Component {
 
   fetchTasksList = () => {
     getTasksList().then(tasksList => {
-      this.setState({ task: tasksList });
+      this.setState({ tasks: tasksList });
     });
   };
 
@@ -39,7 +39,7 @@ class TodoList extends React.Component {
   };
 
   handleTaskDelete = id => {
-    deleteTask(id, updatedTask).then(this.fetchTasksList);
+    deleteTask(id).then(this.fetchTasksList);
   };
 
   handleTaskCreate = text => {
