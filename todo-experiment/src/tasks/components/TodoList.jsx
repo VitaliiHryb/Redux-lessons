@@ -1,53 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import TasksList from './TasksList';
+import * as tasksActions from '../tasks.actions';
 import CreateTaskInput from './CreateTaskInput';
-import {
-  createTask,
-  updateTask,
-  deleteTask,
-  getTasksList,
-} from '../tasksGateway';
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: [],
-    };
-  }
-
   componentDidMount() {
     this.fetchTasksList();
   }
 
   fetchTasksList = () => {
-    getTasksList().then(tasksList => {
-      this.setState({ tasks: tasksList });
-    });
+    this.props.getTasksList();
   };
 
   hadleTaskStatusChange = id => {
-    const { tasks } = this.state;
-    const { done, text, createDate } = tasks;
-    const updatedTask = {
-      text,
-      createDate,
-      done: !done,
-    };
-
-    updateTask(id, updatedTask).then(this.fetchTasksList);
+    this.props.updateTask(id);
   };
 
   handleTaskDelete = id => {
-    deleteTask(id).then(this.fetchTasksList);
+    this.props.deleteTask(id);
   };
 
   handleTaskCreate = text => {
-    createTask({
-      text,
-      done: false,
-      createDate: new Date().toISOString(),
-    }).then(this.fetchTasksList);
+    this.props.createTask(text);
   };
 
   render() {
@@ -57,7 +32,7 @@ class TodoList extends React.Component {
         <main className="todo-list">
           <CreateTaskInput onCreate={this.handleTaskCreate} />
           <TasksList
-            tasks={this.state.tasks}
+            tasks={this.props.tasks}
             handleStatusChange={this.hadleTaskStatusChange}
             handleTaskDelete={this.handleTaskDelete}
           />
@@ -67,4 +42,17 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList;
+const mapState = (state, props) => {
+  return {
+    tasks: state.tasks.tasksList,
+  };
+};
+
+const mapDispatch = {
+  getTasksList: tasksActions.getTasksList,
+  updateTask: tasksActions.updateTask,
+  deleteTask: tasksActions.deleteTask,
+  createTask: tasksActions.createTask,
+};
+
+export default connect(mapState, mapDispatch)(TodoList);
